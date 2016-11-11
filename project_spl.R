@@ -1,6 +1,10 @@
 #--------------------------Telecommunication Churn------------------------------------
 # Dataset Name: churn_tel.csv
 
+#-------------------------Install and Load Packages--------------------------------------------
+source("installAndLoadPackages.R")
+#-------------------------------------------------------------------------------------
+
 #-------------------------Data Exploratory--------------------------------------------
 # i) Description of the Data Set
 #-------------------------------------------------------------------------------------
@@ -206,11 +210,9 @@ t.test(churn$CustServ.Calls ~ churn$Churn)
 #---------------------above variables(Customer Service Call)---------------------
 
 
-install.packages("ggplot2", dependencies = TRUE)
 
 #Customer Service Calls vs Churn
 
-library(ggplot2)
 ggplot() +
     geom_bar(data = churn,
              aes(
@@ -314,7 +316,6 @@ table(churn$flag,churn$Churn)
 
 #cust serv calls vs day calls
 #Conclusion: hiher the
-library(ggplot2)
 qplot(churn$Day.Mins,
       churn$CustServ.Calls,
       data = churn,
@@ -324,16 +325,14 @@ qplot(churn$Day.Mins,
 #Day min Vs Eve min
 #conclusion: Higher the day min and evening min, more the churn
 qplot(churn$Eve.Mins,churn$Day.Mins,
-      data = churn, 
-      colour = Churn, xlab = "Evening Minutes", 
+      data = churn,
+      colour = Churn, xlab = "Evening Minutes",
       ylab= "Day Minutes")
 
 
 #-------------------------------Random Forest-------------------------------------
 #creates a new file firstforest to test against the test data
 #----------------------------------------------------------------------------------
-install.packages("randomForest", dependencies = TRUE)
-library(randomForest)
 
 churn <- read.csv("churn_tel.csv")
 churnTrain <- churn[800:3300, ]
@@ -374,8 +373,6 @@ pie(slices,
 #---------------------------------J48 Decision Tree-------------------------------
 #creates a new file decisionTree to test against the test data
 #----------------------------------------------------------------------------------
-install.packages("RWeka", dependencies = TRUE)
-library(RWeka)
 
 churn <- read.csv("churn_tel.csv")
 churnTrain2 <- churn[800:3300, ]
