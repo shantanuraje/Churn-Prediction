@@ -1,32 +1,13 @@
-#--------------------------Telecommunication Churn------------------------------------
+#--------------------------Telecommunication Churn---------------------------------
 # Dataset Name: churn_tel.csv
 
-#-------------------------Install and Load Packages--------------------------------------------
+#-------------------------Install and Load Packages--------------------------------
 source("installAndLoadPackages.R")
-#-------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------
 
-#-------------------------Data Exploratory--------------------------------------------
-# i) Description of the Data Set
-#-------------------------------------------------------------------------------------
-
-# Check for the Directory of the R language
-getwd()
-
-#copy the churn_tel.csv to this location, view the files present in the directory
-dir()
-
-#import the file in the above directory, then read it here
-churn <- read.csv("churn_tel.csv")
-
-#Names of all the attributes in the data set
-names(churn)
-
-#summary of the dataset
-summary(churn)
-
-#Omit and row which has missing value(there are none), it returns 0 rows
-churn[!complete.cases(churn),]
-
+#-------------------------Check working directory and load data--------------------
+source("loadData.R")
+#----------------------------------------------------------------------------------
 
 #------------------------General Distribution of continuous atribute---------------
 #Histograms (run them one by one)
