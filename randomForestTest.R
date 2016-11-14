@@ -16,8 +16,8 @@ fit <-
     nodesize = 3
   )
 Prediction <- predict(fit, churnTest)
-print(nrow(churnTest$Phone))
-submit <- data.frame(id = churnTest$Id, Churn = Prediction)
+print(nrow(churnTest))
+submit <- data.frame(id = churnTest$Phone, Churn = Prediction)
 write.csv(submit, file = "firstforest.csv", row.names = FALSE)
 fr <- read.csv("firstforest.csv")
 count <- table(churnTest$Churn, fr$Churn)
