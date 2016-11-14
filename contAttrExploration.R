@@ -145,9 +145,6 @@ cor(churnScatter4[sapply(churnScatter2, is.numeric)])
 
 #---------------------Graphical Evidence to retain ------------------------------
 #---------------------above variables(Customer Service Call)---------------------
-
-
-
 #Customer Service Calls vs Churn
 
 ggplot() +
@@ -161,7 +158,6 @@ ggplot() +
   scale_y_continuous("Percent") +
   guides(fill = guide_legend(title = "Churn")) +
   scale_fill_manual(values = c("green", "red"))
-
 #Conclusion: Customer Service Calls is predictive of churn
 
 
