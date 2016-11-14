@@ -1,7 +1,7 @@
 #-------------------------Package Requirements--------------------------------------------
 installedPackages = installed.packages()
 installedPackages = installedPackages[,1]
-requiredPackages = as.matrix(c('ggplot2','randomForest','RWeka'))
+requiredPackages = as.matrix(c('ggplot2','randomForest','RWeka','dplyr'))
 installPackages<-function(package){
   searchResult<- grep(paste(package,"$",sep = ""),installedPackages)
   print(length(searchResult))
@@ -19,4 +19,3 @@ loadPackages<-function(package){
 
 apply(requiredPackages, 1, installPackages)
 apply(requiredPackages, 1, loadPackages)
-

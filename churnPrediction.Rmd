@@ -1,0 +1,31 @@
+---
+title | "Churn Prediction"
+output | html_document
+---
+## Churn Prediction
+
+The churn rate, also known as the rate of attrition, is the percentage of subscribers to a service who discontinue their subscriptions to that service within a given time period. For a company to expand its clientele, its growth rate, as measured by the number of new customers, must exceed its churn rate.
+
+Attribute Name | Description
+------------- | ---------------------------------------------------
+State | categorical, for the 50 states and the District of Columbia
+VoiceMail Plan | dichotomous categorical, yes or no
+Account length | integer-valued, how long account has been active
+Number of voice mail messages | integer-valued
+Area code | categorical
+Total day minutes | continuous, minutes customer used service during the day
+Phone number | essentially a surrogate for customer ID
+Total day calls | integer-valued
+International Plan | dichotomous categorical, yes or no
+Total day charge | continuous, perhaps based on foregoing two variables
+Total evening minutes | continuous, minutes customer used service during the evening.
+Total night charge | continuous, perhaps based on foregoing two variables
+Total evening calls | integer-valued
+Total international minutes | continuous, minutes customer used service to make international calls.
+Total evening charge | continuous, perhaps based on foregoing two variables
+Total international calls | integer-valued
+Total night minutes | continuous, minutes customer used service during the night
+Total international charge | continuous, perhaps based on foregoing two variables
+Total night calls | integer-valued
+Number of calls to customer service | integer-valued
+Churn | Label indicating if customer churned
