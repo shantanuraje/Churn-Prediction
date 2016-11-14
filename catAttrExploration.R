@@ -87,14 +87,14 @@ table(churn$flag,churn$Churn)
 qplot(churn$Day.Mins,
       churn$CustServ.Calls,
       data = churn,
-      colour = Churn)
+      colour = churn$Churn.)
 
 
 #Day min Vs Eve min
 #conclusion: Higher the day min and evening min, more the churn
 qplot(churn$Eve.Mins,churn$Day.Mins,
       data = churn,
-      colour = Churn, xlab = "Evening Minutes",
+      colour = churn$Churn., xlab = "Evening Minutes",
       ylab= "Day Minutes")
 
 
