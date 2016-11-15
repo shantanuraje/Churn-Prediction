@@ -51,6 +51,13 @@ plot(churnScatter1)
 #function of other 4 variables
 cor(churnScatter1[sapply(churnScatter1, is.numeric)])
 
+#If the p-value is greater than .1, it will not be predictive of churn
+t.test(churn$Day.Calls ~ churn$Churn)
+#Eliminate Day Calls Calls
+t.test(churn$Day.Mins ~ churn$Churn)
+#Retain Day Minutes
+
+
 hist(
   churn$Eve.Mins,
   border = "blue",
@@ -99,6 +106,11 @@ plot(churnScatter2)
 #On the basis of corelation we eliminate 4 variables, since there were a linear
 #function of other 4 variables
 cor(churnScatter2[sapply(churnScatter2, is.numeric)])
+#If the p-value is greater than .1, it will not be predictive of churn
+t.test(churn$Eve.Calls ~ churn$Churn)
+#Eliminate Eve Calls
+t.test(churn$Eve.Mins ~ churn$Churn)
+#retain Eve minutes
 
 hist(
   churn$Night.Mins,
@@ -151,6 +163,12 @@ plot(churnScatter4)
 #function of other 4 variables
 cor(churnScatter4[sapply(churnScatter2, is.numeric)])
 
+#If the p-value is greater than .1, it will not be predictive of churn
+t.test(churn$Night.Calls ~ churn$Churn)
+#Eliminate Night Calls
+t.test(churn$Night.Mins ~ churn$Churn)
+#retain Night minutes
+
 hist(
   churn$Intl.Mins,
   border = "blue",
@@ -174,7 +192,11 @@ hist(
   main = "Histogram for Night Charge",
   xlab = "International Charge"
 )
-
+#If the p-value is greater than .1, it will not be predictive of churn
+t.test(churn$Intl.Calls ~ churn$Churn)
+#Retain International Calls
+t.test(churn$CustServ.Calls ~ churn$Churn)
+#retain Customer Service Calls
 
 # Box plots for International Mins, Charge, Calls vs Churn
 IntlMinsChurn=lm(churn$Intl.Mins~churn$Churn)
@@ -227,5 +249,3 @@ ggplot() +
   guides(fill = guide_legend(title = "Churn")) +
   scale_fill_manual(values = c("green", "red"))
 #Conclusion: Customer Service Calls is predictive of churn
-
-
