@@ -142,6 +142,62 @@ cor(churnScatter2[sapply(churnScatter2, is.numeric)])
 cor(churnScatter3[sapply(churnScatter2, is.numeric)])
 cor(churnScatter4[sapply(churnScatter2, is.numeric)])
 
+DayMinsChurn=lm(churn$Day.Mins~churn$Churn)
+summary(DayMinsChurn)
+plot(churn$Day.Mins~churn$Churn)
+
+EveMinsChurn=lm(churn$Eve.Mins~churn$Churn)
+summary(EveMinsChurn)
+plot(churn$Eve.Mins~churn$Churn)
+
+NightMinsChurn=lm(churn$Night.Mins~churn$Churn)
+summary(NightMinsChurn)
+plot(churn$Night.Mins~churn$Churn)
+
+IntlMinsChurn=lm(churn$Intl.Mins~churn$Churn)
+summary(IntlMinsChurn)
+plot(churn$Intl.Mins~churn$Churn)
+
+#churn predictions based on Charges
+
+DayChargeChurn=lm(churn$Day.Charge~churn$Churn)
+summary(DayChargeChurn)
+plot(churn$Day.Charge~churn$Churn)
+
+NightChargeChurn=lm(churn$Night.Charge~churn$Churn)
+summary(NightChargeChurn)
+plot(churn$Night.Charge~churn$Churn)
+
+IntlChargeChurn=lm(churn$Intl.Charge~churn$Churn)
+summary(IntlChargeChurn)
+plot(churn$Intl.Charge~churn$Churn)
+
+EveChargeChurn=lm(churn$Eve.Charge~churn$Churn)
+summary(EveChargeChurn)
+plot(churn$Eve.Charge~churn$Churn)
+
+#churn predictions based on calls
+
+DayCallsChurn=lm(churn$Day.Calls~churn$Churn)
+summary(DayCallsChurn)
+plot(churn$Day.Calls~churn$Churn)
+
+NightCallsChurn=lm(churn$Night.Calls~churn$Churn)
+summary(NightCallsChurn)
+plot(churn$Night.Calls~churn$Churn)
+
+EvenCallsChurn=lm(churn$Eve.Calls~churn$Churn)
+summary(EvenCallsChurn)
+plot(churn$Eve.Calls~churn$Churn)
+
+IntlCallsChurn=lm(churn$Intl.Calls~churn$Churn)
+summary(IntlCallsChurn)
+plot(churn$Intl.Calls~churn$Churn)
+
+CustServChurn=lm(churn$CustServ.Calls~churn$Churn)
+summary(CustServChurn)
+plot(churn$CustServ.Calls~churn$Churn)
+
 
 #---------------------Graphical Evidence to retain ------------------------------
 #---------------------above variables(Customer Service Call)---------------------
@@ -159,5 +215,3 @@ ggplot() +
   guides(fill = guide_legend(title = "Churn")) +
   scale_fill_manual(values = c("green", "red"))
 #Conclusion: Customer Service Calls is predictive of churn
-
-
