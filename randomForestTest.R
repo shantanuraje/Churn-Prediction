@@ -16,11 +16,7 @@ fit <-
     nodesize = 3
   )
 Prediction <- predict(fit, churnTest)
-print(nrow(churnTest))
-submit <- data.frame(id = churnTest$Phone, Churn = Prediction)
-write.csv(submit, file = "firstforest.csv", row.names = FALSE)
-fr <- read.csv("firstforest.csv")
-count <- table(churnTest$Churn, fr$Churn)
+count <- table(churnTest$Churn, Prediction)
 count
 
 #Accuracy of Random Forest(using pie chart)
