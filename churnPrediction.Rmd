@@ -1,5 +1,5 @@
 ---
-output: pdf_document
+output: html_document
 ---
 ## Churn Prediction
 
@@ -109,44 +109,6 @@ DayCallsChurn=lm(churn$Day.Calls~churn$Churn)
 summary(DayCallsChurn)
 plot(churn$Day.Calls~churn$Churn)
 
-# Box plots for Evening Mins, Charge, Calls vs Churn
-EveMinsChurn=lm(churn$Eve.Mins~churn$Churn)
-summary(EveMinsChurn)
-plot(churn$Eve.Mins~churn$Churn)
-
-EveChargeChurn=lm(churn$Eve.Charge~churn$Churn)
-summary(EveChargeChurn)
-plot(churn$Eve.Charge~churn$Churn)
-
-EvenCallsChurn=lm(churn$Eve.Calls~churn$Churn)
-summary(EvenCallsChurn)
-plot(churn$Eve.Calls~churn$Churn)
-
-# Box plots for Night Mins, Charge, Calls vs Churn
-NightMinsChurn=lm(churn$Night.Mins~churn$Churn)
-summary(NightMinsChurn)
-plot(churn$Night.Mins~churn$Churn)
-
-NightChargeChurn=lm(churn$Night.Charge~churn$Churn)
-summary(NightChargeChurn)
-plot(churn$Night.Charge~churn$Churn)
-
-NightCallsChurn=lm(churn$Night.Calls~churn$Churn)
-summary(NightCallsChurn)
-plot(churn$Night.Calls~churn$Churn)
-
-# Box plots for International Mins, Charge, Calls vs Churn
-IntlMinsChurn=lm(churn$Intl.Mins~churn$Churn)
-summary(IntlMinsChurn)
-plot(churn$Intl.Mins~churn$Churn)
-
-IntlChargeChurn=lm(churn$Intl.Charge~churn$Churn)
-summary(IntlChargeChurn)
-plot(churn$Intl.Charge~churn$Churn)
-
-IntlCallsChurn=lm(churn$Intl.Calls~churn$Churn)
-summary(IntlCallsChurn)
-plot(churn$Intl.Calls~churn$Churn)
 
 
 #scatter plot amongst the seemingly similar variables(continuous)
@@ -185,6 +147,19 @@ hist(
   xlab = "Eve Charge"
 )
 
+# Box plots for Evening Mins, Charge, Calls vs Churn
+EveMinsChurn=lm(churn$Eve.Mins~churn$Churn)
+summary(EveMinsChurn)
+plot(churn$Eve.Mins~churn$Churn)
+
+EveChargeChurn=lm(churn$Eve.Charge~churn$Churn)
+summary(EveChargeChurn)
+plot(churn$Eve.Charge~churn$Churn)
+
+EvenCallsChurn=lm(churn$Eve.Calls~churn$Churn)
+summary(EvenCallsChurn)
+plot(churn$Eve.Calls~churn$Churn)
+
 #scatter plot amongst the seemingly similar variables(continuous)
 
 churnScatter2 <- churn[, c("Eve.Mins", "Eve.Calls", "Eve.Charge")]
@@ -220,6 +195,19 @@ hist(
   main = "Histogram for Night Charge",
   xlab = "Night Charge"
 )
+
+# Box plots for Night Mins, Charge, Calls vs Churn
+NightMinsChurn=lm(churn$Night.Mins~churn$Churn)
+summary(NightMinsChurn)
+plot(churn$Night.Mins~churn$Churn)
+
+NightChargeChurn=lm(churn$Night.Charge~churn$Churn)
+summary(NightChargeChurn)
+plot(churn$Night.Charge~churn$Churn)
+
+NightCallsChurn=lm(churn$Night.Calls~churn$Churn)
+summary(NightCallsChurn)
+plot(churn$Night.Calls~churn$Churn)
 
 #scatter plot amongst the seemingly similar variables(continuous)
 
@@ -258,6 +246,20 @@ hist(
   main = "Histogram for Night Charge",
   xlab = "International Charge"
 )
+
+
+# Box plots for International Mins, Charge, Calls vs Churn
+IntlMinsChurn=lm(churn$Intl.Mins~churn$Churn)
+summary(IntlMinsChurn)
+plot(churn$Intl.Mins~churn$Churn)
+
+IntlChargeChurn=lm(churn$Intl.Charge~churn$Churn)
+summary(IntlChargeChurn)
+plot(churn$Intl.Charge~churn$Churn)
+
+IntlCallsChurn=lm(churn$Intl.Calls~churn$Churn)
+summary(IntlCallsChurn)
+plot(churn$Intl.Calls~churn$Churn)
 
 #scatter plot amongst the seemingly similar variables(continuous)
 
