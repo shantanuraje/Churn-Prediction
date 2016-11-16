@@ -1,5 +1,5 @@
 ---
-output: html_document
+output: word_document
 ---
 ## Churn Prediction
 
@@ -69,7 +69,7 @@ summary(churn)
 churn[!complete.cases(churn),]
 ```
 
-```{r contAttrExploration, echo=TRUE}
+```{r dataExploration, echo=TRUE}
 #Histograms (run them one by one)
 
 hist(
@@ -123,6 +123,13 @@ plot(churnScatter1)
 #function of other 4 variables
 cor(churnScatter1[sapply(churnScatter1, is.numeric)])
 
+#If the p-value is greater than .1, it will not be predictive of churn
+t.test(churn$Day.Calls ~ churn$Churn)
+#Eliminate Day Calls Calls
+t.test(churn$Day.Mins ~ churn$Churn)
+#Retain Day Minutes
+
+
 hist(
   churn$Eve.Mins,
   border = "blue",
@@ -171,6 +178,19 @@ plot(churnScatter2)
 #On the basis of corelation we eliminate 4 variables, since there were a linear
 #function of other 4 variables
 cor(churnScatter2[sapply(churnScatter2, is.numeric)])
+#If the p-value is greater than .1, it will not be predictive of churn
+t.test(churn$Eve.Calls ~ churn$Churn)
+#Eliminate Eve Calls
+t.test(churn$Eve.Mins ~ churn$Churn)
+#retain Eve minutes
+
+#Day min Vs Eve min
+#conclusion: Higher the day min and evening min, more the churn
+qplot(churn$Eve.Mins,churn$Day.Mins,
+      data = churn,
+      colour = churn$Churn., xlab = "Evening Minutes",
+      ylab= "Day Minutes")
+
 
 hist(
   churn$Night.Mins,
@@ -223,6 +243,12 @@ plot(churnScatter4)
 #function of other 4 variables
 cor(churnScatter4[sapply(churnScatter2, is.numeric)])
 
+#If the p-value is greater than .1, it will not be predictive of churn
+t.test(churn$Night.Calls ~ churn$Churn)
+#Eliminate Night Calls
+t.test(churn$Night.Mins ~ churn$Churn)
+#retain Night minutes
+
 hist(
   churn$Intl.Mins,
   border = "blue",
@@ -246,7 +272,11 @@ hist(
   main = "Histogram for Night Charge",
   xlab = "International Charge"
 )
-
+#If the p-value is greater than .1, it will not be predictive of churn
+t.test(churn$Intl.Calls ~ churn$Churn)
+#Retain International Calls
+t.test(churn$CustServ.Calls ~ churn$Churn)
+#retain Customer Service Calls
 
 # Box plots for International Mins, Charge, Calls vs Churn
 IntlMinsChurn=lm(churn$Intl.Mins~churn$Churn)
@@ -273,66 +303,6 @@ plot(churnScatter3)
 #On the basis of corelation we eliminate 4 variables, since there were a linear
 #function of other 4 variables
 cor(churnScatter3[sapply(churnScatter2, is.numeric)])
-
-hist(
-  churn$CustServ.Calls,
-  border = "blue",
-  col = "green",
-  main = "Histogram for Customer Service Calls",
-  xlab = "Customer Service Calls"
-)
-
-
-#---------------------Graphical Evidence to retain ------------------------------
-#---------------------above variables(Customer Service Call)---------------------
-#Customer Service Calls vs Churn
-
-ggplot() +
-  geom_bar(data = churn,
-           aes(
-             x = factor(churn$CustServ.Calls),
-             fill = factor(churn$Churn)
-           ),
-           position = "fill") +
-  scale_x_discrete("Customer Service Calls") +
-  scale_y_continuous("Percent") +
-  guides(fill = guide_legend(title = "Churn")) +
-  scale_fill_manual(values = c("green", "red"))
-#Conclusion: Customer Service Calls is predictive of churn
-```
-
-```{r tTests, echo=TRUE}
-#If the p-value is greater than .1, it will not be predictive of churn
-
-t.test(churn$Intl.Calls ~ churn$Churn)
-#Retain International Calls
-
-t.test(churn$Day.Calls ~ churn$Churn)
-#Eliminate Day Calls Calls
-
-t.test(churn$Night.Calls ~ churn$Churn)
-#Eliminate Night Calls
-
-t.test(churn$Eve.Calls ~ churn$Churn)
-#Eliminate Eve Calls
-
-t.test(churn$Day.Mins ~ churn$Churn)
-#Retain Day Minutes
-
-t.test(churn$Eve.Mins ~ churn$Churn)
-#retain Eve minutes
-
-t.test(churn$Night.Mins ~ churn$Churn)
-#retain Night minutes
-
-t.test(churn$CustServ.Calls ~ churn$Churn)
-#retain Customer Service Calls
-
-#conclusion: Retain Intl Calls, Eve minutes, Nigh, Eve, Day Minutes
-#, Customer Service Calls
-```
-
-```{r catAttrExploration, echo=TRUE}
 
 #Intl Plan
 
@@ -393,7 +363,6 @@ box(which = "plot",
     lty = "solid",
     col = "black")
 
-
 #Vmail Plan
 #weak evidence, but still vmail plan may be predictive
 #'cause we can see int row.margin[2,1] and row.margin[2,2]
@@ -415,6 +384,33 @@ row.margin
 churn$flag[churn$VMail.Message>0] <- 1
 churn$flag[churn$VMail.Message<=0] <- 0
 table(churn$flag,churn$Churn)
+
+
+#---------------------Graphical Evidence to retain ------------------------------
+#---------------------above variables(Customer Service Call)---------------------
+hist(
+  churn$CustServ.Calls,
+  border = "blue",
+  col = "green",
+  main = "Histogram for Customer Service Calls",
+  xlab = "Customer Service Calls"
+)
+
+#Customer Service Calls vs Churn
+
+ggplot() +
+  geom_bar(data = churn,
+           aes(
+             x = factor(churn$CustServ.Calls),
+             fill = factor(churn$Churn)
+           ),
+           position = "fill") +
+  scale_x_discrete("Customer Service Calls") +
+  scale_y_continuous("Percent") +
+  guides(fill = guide_legend(title = "Churn")) +
+  scale_fill_manual(values = c("green", "red"))
+
+
 #------------------Multivariate relationships-------------------------------------
 
 #cust serv calls vs day calls
@@ -424,16 +420,7 @@ qplot(churn$Day.Mins,
       data = churn,
       colour = churn$Churn.)
 
-
-#Day min Vs Eve min
-#conclusion: Higher the day min and evening min, more the churn
-qplot(churn$Eve.Mins,churn$Day.Mins,
-      data = churn,
-      colour = churn$Churn., xlab = "Evening Minutes",
-      ylab= "Day Minutes")
-
-
-
+#Conclusion: Customer Service Calls is predictive of churn
 ```
 
 ```{r randomForestTest, echo=TRUE} 
